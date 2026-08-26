@@ -29,3 +29,8 @@ def generate_synthetic_data(
     xs = [random.uniform(-10.0, 10.0) for _ in range(n_samples)]
     ys = [true_w * x + true_b + random.gauss(0.0, noise_std) for x in xs]
     return xs, ys
+
+
+def predict(x: float, w: float, b: float) -> float:
+    """Linear model output for a single input."""
+    return w * x + b
