@@ -83,3 +83,28 @@ def save_checkpoint_plot(
 
     fig.savefig(os.path.join(output_dir, f"epoch_{epoch:03d}.png"))
     plt.close(fig)  # avoid accumulating open figures across many checkpoints
+
+
+def train(
+    xs: List[float],
+    ys: List[float],
+    learning_rate: float,
+    epochs: int,
+    checkpoint_interval: int,
+    output_dir: str,
+) -> Tuple[float, float]:
+    """Fit w and b by batch gradient descent, logging and plotting at checkpoints."""
+    w, b = 0.0, 0.0  # flat line through the origin; a neutral, arbitrary start
+
+    for epoch in range(1, epochs + 1):
+        grad_w, grad_b = compute_gradients(xs, ys, w, b)
+        w -= learning_rate * grad_w
+        b -= learning_rate * grad_b
+
+        # Always checkpoint the final epoch too, even if it doesn't land on the interval.
+        if epoch % checkpoint_interval == 0 or epoch == epochs:
+            loss = compute_loss(xs, ys, w, b)
+            print(f"epoch {epoch:4d} | loss {loss:.4f} | w {w:.4f} | b {b:.4f}")
+            save_checkpoint_plot(xs, ys, w, b, epoch, output_dir)
+
+    return w, b
