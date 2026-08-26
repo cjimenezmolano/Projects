@@ -34,3 +34,9 @@ def generate_synthetic_data(
 def predict(x: float, w: float, b: float) -> float:
     """Linear model output for a single input."""
     return w * x + b
+
+
+def compute_loss(xs: List[float], ys: List[float], w: float, b: float) -> float:
+    """Mean squared error between predictions and targets."""
+    squared_errors = [(predict(x, w, b) - y) ** 2 for x, y in zip(xs, ys)]
+    return sum(squared_errors) / len(xs)
