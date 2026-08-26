@@ -54,6 +54,12 @@ def predict(x: float, w: float, b: float) -> float:
 def compute_loss(xs: List[float], ys: List[int], w: float, b: float) -> float:
     """Binary cross-entropy loss, averaged over the dataset."""
     # ## START CODE HERE ##
+    n = len(xs)
+    error = 0
+    for i in range(n):
+        error += (ys[i] * math.log(predict(xs[i], w, b))) + ((1 - ys[i]) * math.log(1 - predict(xs[i], w, b)))
+
+    return -(1 / n) * error
     raise NotImplementedError
     # ## END CODE HERE ##
 
