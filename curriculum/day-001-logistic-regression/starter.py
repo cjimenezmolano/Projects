@@ -39,7 +39,6 @@ def sigmoid(z: float) -> float:
     """Return 1 / (1 + e^-z)."""
     # ## START CODE HERE ##
     return (1 / (1 + (math.exp(-z))))
-    raise NotImplementedError
     # ## END CODE HERE ##
 
 
@@ -47,7 +46,6 @@ def predict(x: float, w: float, b: float) -> float:
     """Return sigmoid(w*x + b): the predicted probability that x is class 1."""
     # ## START CODE HERE ##
     return sigmoid(w * x + b)
-    raise NotImplementedError
     # ## END CODE HERE ##
 
 
@@ -60,7 +58,6 @@ def compute_loss(xs: List[float], ys: List[int], w: float, b: float) -> float:
         error += (ys[i] * math.log(predict(xs[i], w, b))) + ((1 - ys[i]) * math.log(1 - predict(xs[i], w, b)))
 
     return -(1 / n) * error
-    raise NotImplementedError
     # ## END CODE HERE ##
 
 
@@ -69,7 +66,15 @@ def compute_gradients(
 ) -> Tuple[float, float]:
     """Partial derivatives of the BCE loss with respect to w and b."""
     # ## START CODE HERE ##
-    raise NotImplementedError
+    n = len(xs)
+    error_w = 0
+    error_b = 0
+    for i in range(n):
+        error = predict(xs[i], w, b) - ys[i]
+        error_b += error
+        error_w += error * xs[i]
+
+    return ((1/n) * error_w, (1/n) * error_b)
     # ## END CODE HERE ##
 
 
