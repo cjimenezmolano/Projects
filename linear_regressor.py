@@ -108,3 +108,22 @@ def train(
             save_checkpoint_plot(xs, ys, w, b, epoch, output_dir)
 
     return w, b
+
+
+if __name__ == "__main__":
+    LEARNING_RATE = 0.01
+    EPOCHS = 200
+    CHECKPOINT_INTERVAL = 10
+    N_SAMPLES = 60
+    TRUE_W, TRUE_B = 2.5, -1.0
+    NOISE_STD = 2.0
+    SEED = 42
+    OUTPUT_DIR = "plots"
+
+    xs, ys = generate_synthetic_data(N_SAMPLES, TRUE_W, TRUE_B, NOISE_STD, seed=SEED)
+    final_w, final_b = train(
+        xs, ys, LEARNING_RATE, EPOCHS, CHECKPOINT_INTERVAL, OUTPUT_DIR
+    )
+
+    print(f"true params:    w={TRUE_W}, b={TRUE_B}")
+    print(f"learned params: w={final_w:.4f}, b={final_b:.4f}")
