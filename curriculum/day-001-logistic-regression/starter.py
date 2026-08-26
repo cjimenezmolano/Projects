@@ -46,6 +46,7 @@ def sigmoid(z: float) -> float:
 def predict(x: float, w: float, b: float) -> float:
     """Return sigmoid(w*x + b): the predicted probability that x is class 1."""
     # ## START CODE HERE ##
+    return sigmoid(w * x + b)
     raise NotImplementedError
     # ## END CODE HERE ##
 
