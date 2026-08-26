@@ -38,6 +38,7 @@ def generate_synthetic_data(
 def sigmoid(z: float) -> float:
     """Return 1 / (1 + e^-z)."""
     # ## START CODE HERE ##
+    return (1 / (1 + (math.exp(-z))))
     raise NotImplementedError
     # ## END CODE HERE ##
 
