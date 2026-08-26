@@ -1,9 +1,8 @@
 """
-Simple linear regression (y = wx + b) trained from scratch with gradient descent.
+Linear regression (y = wx + b) fit by hand with gradient descent.
 
-Every numerical step -- predictions, loss, gradients, parameter updates -- is
-plain Python (loops, lists, arithmetic). matplotlib is used only to render
-checkpoint plots, never for computation.
+No numpy/sklearn -- predictions, loss, and gradients are plain Python.
+matplotlib is only for plotting, not computation.
 """
 
 from __future__ import annotations
