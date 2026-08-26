@@ -57,3 +57,29 @@ def compute_gradients(
     grad_w = (2.0 / n) * error_sum_wx
     grad_b = (2.0 / n) * error_sum_b
     return grad_w, grad_b
+
+
+def save_checkpoint_plot(
+    xs: List[float],
+    ys: List[float],
+    w: float,
+    b: float,
+    epoch: int,
+    output_dir: str,
+) -> None:
+    """Plot the data against the current fitted line and save it as epoch_XXX.png."""
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Two points fully determine the line; no need to sample along the whole range.
+    x_min, x_max = min(xs), max(xs)
+    line_xs = [x_min, x_max]
+    line_ys = [predict(x, w, b) for x in line_xs]
+
+    fig, ax = plt.subplots()
+    ax.scatter(xs, ys, s=15, alpha=0.6, label="data")
+    ax.plot(line_xs, line_ys, color="crimson", label=f"y = {w:.2f}x + {b:.2f}")
+    ax.set_title(f"epoch {epoch}")
+    ax.legend()
+
+    fig.savefig(os.path.join(output_dir, f"epoch_{epoch:03d}.png"))
+    plt.close(fig)  # avoid accumulating open figures across many checkpoints
