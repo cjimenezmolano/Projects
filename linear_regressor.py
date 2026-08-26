@@ -40,3 +40,20 @@ def compute_loss(xs: List[float], ys: List[float], w: float, b: float) -> float:
     """Mean squared error between predictions and targets."""
     squared_errors = [(predict(x, w, b) - y) ** 2 for x, y in zip(xs, ys)]
     return sum(squared_errors) / len(xs)
+
+
+def compute_gradients(
+    xs: List[float], ys: List[float], w: float, b: float
+) -> Tuple[float, float]:
+    """Partial derivatives of the MSE loss with respect to w and b."""
+    n = len(xs)
+    error_sum_wx = 0.0
+    error_sum_b = 0.0
+    for x, y in zip(xs, ys):
+        error = predict(x, w, b) - y
+        error_sum_wx += error * x
+        error_sum_b += error
+
+    grad_w = (2.0 / n) * error_sum_wx
+    grad_b = (2.0 / n) * error_sum_b
+    return grad_w, grad_b
