@@ -124,9 +124,10 @@ def train(
     for epoch in range(1, epochs + 1):
         grad_w, grad_b = compute_gradients(xs, ys, w, b)
 
-        # ## START CODE HERE ## (apply the gradient descent update to w and b)
-        raise NotImplementedError
-        # ## END CODE HERE ##
+        ## START CODE HERE ## (apply the gradient descent update to w and b)
+        w -= learning_rate * grad_w
+        b -= learning_rate * grad_b
+        ## END CODE HERE ##
 
         if epoch % checkpoint_interval == 0 or epoch == epochs:
             loss = compute_loss(xs, ys, w, b)
